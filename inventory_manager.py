@@ -19,6 +19,24 @@ def save_inventory(inventory):
         json.dump(inventory, file, indent=4)
     print(f"Inventory saved successfully to {FILENAME}.\n")
 
+def add_product(inventory):
+    print("Add new product")
+    product_id = input("Product ID: ").strip()
+    name = input("Product Name: ").strip()
+
+    price = float(input("Price: "))
+    stock = int(input("Stock Quantity: "))
+
+    new_product = {
+        "id": product_id,
+        "name": name,
+        "price": price,
+        "stock": stock
+    }
+
+    inventory.append(new_product)
+    print("\nProduct added successfully!\n")
+
 
 def display_menu():
     print("=" * 35)
@@ -43,7 +61,9 @@ def main():
         option = input("Enter option: ").strip()
         print()
 
-        if option == "5":
+        if option == "2":
+            add_product(inventory)
+        elif option == "5":
             save_inventory(inventory)
         elif option == "6":
             print("Exiting program. Goodbye!")
