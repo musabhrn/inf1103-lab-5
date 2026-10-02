@@ -20,14 +20,14 @@ def save_inventory(inventory):
     print(f"Inventory saved successfully to {FILENAME}.\n")
 
 def display_all(inventory):
-    print("Current inventory")
+    print("Current Inventory")
     print("-" * 45)
     if not inventory:
         print("No products in inventory.")
     else:
         for item in inventory:
             print(
-                f"ID: {item['id']} | Product Name: {item['name']} | Price: {item['price']} | Stock: {item['stock']}"
+                f"ID: {item['id']} | Name: {item['name']} | Price: {item['price']} | Stock: {item['stock']}"
             )
     print("-" * 45)
     print()
@@ -71,6 +71,24 @@ def update_stock (inventory):
 
     print("Product not found.\n")
 
+def search_product(inventory):
+    print("Search Product")
+    query = input("Enter Product ID: ").strip()
+    print()
+
+    for item in inventory:
+        if item['id'] == query.lower():
+            print("Product Found")
+            print("-" * 45)
+            print(f"ID: {item['id']}")
+            print(f"Name: {item['name']}")
+            print(f"Price: {item['price']}")
+            print(f"Stock: {item['stock']}")
+            print("-" * 45 + "\n")
+            return
+
+    print("Product not found.\n")
+
 
 def display_menu():
     print("=" * 35)
@@ -101,6 +119,8 @@ def main():
             add_product(inventory)
         elif option == "3":
             update_stock(inventory)
+        elif option == "4":
+            search_product(inventory)
         elif option == "5":
             save_inventory(inventory)
         elif option == "6":
