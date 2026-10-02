@@ -13,6 +13,13 @@ def load_inventory():
         print(f"{FILENAME} not found. Starting with empty inventory.\n")
         return []
 
+def save_inventory(inventory):
+    print("Saving inventory...")
+    with open(FILENAME, "w") as file:
+        json.dump(inventory, file, indent=4)
+    print(f"Inventory saved successfully to {FILENAME}.\n")
+
+
 def display_menu():
     print("=" * 35)
     print("INVENTORY MANAGEMENT SYSTEM")
@@ -36,7 +43,9 @@ def main():
         option = input("Enter option: ").strip()
         print()
 
-        if option == "6":
+        if option == "5":
+            save_inventory(inventory)
+        elif option == "6":
             print("Exiting program. Goodbye!")
             break
 
