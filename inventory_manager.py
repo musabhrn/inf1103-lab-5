@@ -50,6 +50,27 @@ def add_product(inventory):
     inventory.append(new_product)
     print("\nProduct added successfully!\n")
 
+def update_stock (inventory):
+    print("Update Stock")
+    product_id = input("Enter Product ID: ").strip()
+    print()
+
+    for item in inventory:
+        if item['id'].lower() == product_id.lower():
+            print("Product Found:")
+            print(f"Name: {item['name']}")
+            print(f"Current Stock: {item['stock']}\n")
+            try:
+                new_stock = int(input("New Stock Quantity: "))
+                item['stock'] = new_stock
+                print("\nStock updated successfully!\n")
+                return
+            except ValueError:
+                print("Invalid stock quantity input\n")
+                return
+
+    print("Product not found.\n")
+
 
 def display_menu():
     print("=" * 35)
@@ -78,6 +99,8 @@ def main():
             display_all(inventory)
         elif option == "2":
             add_product(inventory)
+        elif option == "3":
+            update_stock(inventory)
         elif option == "5":
             save_inventory(inventory)
         elif option == "6":
