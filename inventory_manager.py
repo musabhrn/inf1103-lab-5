@@ -27,7 +27,7 @@ def display_all(inventory):
     else:
         for item in inventory:
             print(
-                f"ID: {item['id']} | Name: {item['name']} | Price: {item['price']} | Stock: {item['stock']}"
+                f"ID: {item['id']} | Name: {item['name']} | Price: ${item['price']:.2f} | Stock: {item['stock']}"
             )
     print("-" * 45)
     print()
@@ -77,7 +77,7 @@ def search_product(inventory):
     print()
 
     for item in inventory:
-        if item['id'] == query.lower():
+        if item['id'].lower() == query.lower():
             print("Product Found")
             print("-" * 45)
             print(f"ID: {item['id']}")
@@ -124,8 +124,15 @@ def main():
         elif option == "5":
             save_inventory(inventory)
         elif option == "6":
-            print("Exiting program. Goodbye!")
+            print("Saving inventory before exit...")
+            with open(FILENAME, "w") as file:
+                json.dump(inventory, file, indent=4)
+            print("Inventory saved successfully.\n")
+            print("Thank you for using Inventory Management System.")
+            print("Program terminated.")
             break
+        else: 
+            print("Invalid option. Please try again.\n")
 
 if __name__ == "__main__":
     main()
